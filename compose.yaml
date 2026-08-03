@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: movieflix
+    environment:
+      POSTGRES_DB: ${DBNAME}
+      POSTGRES_PASSWORD: ${PASS}
+      POSTGRES_USER: ${USER}
+    ports:
+      - '${DBPORT}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    name: movieflix_postgres_volume
