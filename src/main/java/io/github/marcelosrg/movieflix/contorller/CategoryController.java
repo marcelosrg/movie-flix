@@ -2,6 +2,7 @@ package io.github.marcelosrg.movieflix.contorller;
 
 import io.github.marcelosrg.movieflix.entity.Category;
 import io.github.marcelosrg.movieflix.service.CategoryService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.findAll();
     }
