@@ -4,8 +4,8 @@ services:
     container_name: movieflix
     environment:
       POSTGRES_DB: ${DBNAME}
-      POSTGRES_PASSWORD: ${PASS}
-      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
     ports:
       - '${DBPORT}:5432'
     volumes:

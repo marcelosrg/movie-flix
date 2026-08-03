@@ -2,14 +2,14 @@ spring:
   application:
     name: movieflix
   datasource:
-    url: jdbc:postgresql:${HOST}:${DBPORT}/${DBNAME}
-    ursername: ${USER}
-    password: ${PASS}
+    url: jdbc:postgresql://${HOST}:${DBPORT}/${DBNAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
 
-    jpa:
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-      show-sql: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
-    flyway:
-      enable: true
+  flyway:
+    enabled: true
