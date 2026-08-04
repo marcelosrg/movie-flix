@@ -24,18 +24,21 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> findCategoryById(@PathVariable() UUID id) {
         CategoryResponse category = categoryService.findById(id);
-        return ResponseEntity.ok().body(category);
+        return ResponseEntity.ok(category);
     }
 
     @GetMapping
-    public List<CategoryResponse> getAllCategories() {
-        return categoryService.findAll();
+    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+        List<CategoryResponse> catogories = categoryService.findAll();
+        return ResponseEntity.ok(catogories);
     }
 
 
     @PostMapping()
-    public CategoryResponse createCategory(@RequestBody CategoryRequest request) {
-        return categoryService.createCategory(request);
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CategoryRequest request) {
+        CategoryResponse response = categoryService.createCategory(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{id}")
