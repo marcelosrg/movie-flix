@@ -1,0 +1,21 @@
+package io.github.marcelosrg.movieflix.dtos.response;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+public record MovieResponse(UUID id,
+                            String title,
+                            String description,
+
+                            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+                            LocalDate releaseDate,
+                            double rating,
+                            List<CategoryResponse> categories,
+                            List<StreamingResponse> streamings,
+                            LocalDateTime createdAt,
+                            LocalDateTime updatedAt) {
+}
