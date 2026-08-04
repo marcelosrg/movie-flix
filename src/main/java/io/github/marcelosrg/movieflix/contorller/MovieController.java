@@ -1,8 +1,13 @@
 package io.github.marcelosrg.movieflix.contorller;
 
+import io.github.marcelosrg.movieflix.dtos.request.MovieRequest;
+import io.github.marcelosrg.movieflix.dtos.response.MovieResponse;
 import io.github.marcelosrg.movieflix.service.MovieService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/movieflix/movie")
@@ -11,5 +16,20 @@ public class MovieController {
     private final MovieService movieService;
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
+    }
+
+    @PostMapping
+    public ResponseEntity<MovieResponse> createMovie(@RequestBody MovieRequest movieRequest) {
+
+        MovieResponse movieCreated = movieService.createMovie(movieRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieCreated);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MovieResponse>> findAll() {
+        List<MovieResponse> movieResponses = movieService.findAll();
+        return ResponseEntity.ok(movieResponses);
     }
 }
