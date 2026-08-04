@@ -39,6 +39,10 @@ public class MovieService {
         return movieMapper.toResponseList(movieRepository.findAll());
     }
 
+    public MovieResponse findById(UUID id){
+        return movieMapper.toResponse(movieRepository.findById(id).orElseThrow(() -> new NotFoundException("filme não encontrado!")));
+    }
+
     public MovieResponse createMovie(MovieRequest movieRequest) {
         Movie movie = movieMapper.toEntity(movieRequest);
 

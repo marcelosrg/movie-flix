@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/movieflix/movie")
@@ -30,6 +31,12 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<List<MovieResponse>> findAll() {
         List<MovieResponse> movieResponses = movieService.findAll();
+        return ResponseEntity.ok(movieResponses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieResponse> findById(@PathVariable UUID id) {
+        MovieResponse movieResponses = movieService.findById(id);
         return ResponseEntity.ok(movieResponses);
     }
 }
