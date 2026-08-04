@@ -1,6 +1,7 @@
 package io.github.marcelosrg.movieflix.contorller;
 
-import io.github.marcelosrg.movieflix.entity.Category;
+import io.github.marcelosrg.movieflix.dtos.request.CategoryRequest;
+import io.github.marcelosrg.movieflix.dtos.response.CategoryResponse;
 import io.github.marcelosrg.movieflix.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,20 +22,23 @@ public class CategoryController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> findCategoryById(@PathVariable() UUID id) {
-        Category category = categoryService.findById(id);
-        return ResponseEntity.ok().body(category);
+    public ResponseEntity<CategoryResponse> findCategoryById(@PathVariable() UUID id) {
+        CategoryResponse category = categoryService.findById(id);
+        return ResponseEntity.ok(category);
     }
 
     @GetMapping
-    public List<Category> getAllCategories() {
-        return categoryService.findAll();
+    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+        List<CategoryResponse> catogories = categoryService.findAll();
+        return ResponseEntity.ok(catogories);
     }
 
 
     @PostMapping()
-    public Category createCategory(@RequestBody Category category) {
-        return categoryService.createCategory(category);
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CategoryRequest request) {
+        CategoryResponse response = categoryService.createCategory(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{id}")
