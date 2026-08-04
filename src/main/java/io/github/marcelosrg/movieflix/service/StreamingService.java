@@ -27,7 +27,7 @@ public class StreamingService {
     }
 
 
-    public StreamingResponse createCategory(StreamingRequest streamingRequest) {
+    public StreamingResponse createStreaming(StreamingRequest streamingRequest) {
         return streamingMapper.toResponse(streamingRepository.save(streamingMapper.toStreaming(streamingRequest)));
     }
 
@@ -35,7 +35,7 @@ public class StreamingService {
         return streamingMapper.toResponse(streamingRepository.findById(id).orElseThrow(() -> new NotFoundException("Streaming não encontrada!")));
     }
 
-    public void deleteCategory(UUID id){
+    public void deleteStreaming(UUID id){
         Streaming streaming = streamingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada!"));
         streamingRepository.deleteById(id);
     }
