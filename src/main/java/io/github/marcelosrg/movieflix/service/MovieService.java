@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -52,20 +53,33 @@ public class MovieService {
         return movieMapper.toResponse(movieRepository.save(movie));
     }
 
+    public MovieResponse updateMovie(UUID movieId, MovieRequest movieRequest) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new NotFoundException("Filme não encontrado!"));
+
+        movie.setTitle(movieRequest.title());
+        movie.setDescription(movieRequest.description());
+        movie.setRating(movieRequest.rating());
+        movie.setReleaseDate(movieRequest.releaseDate());
+        movie.setCategories(findCategories(movieRequest.categories()));
+        movie.setStreamings(findStreamings(movieRequest.streamings()));
+        return movieMapper.toResponse(movieRepository.save(movie));
 
 
-    private List<Category> findCategories(List<UUID> categoryIds) {
-        return categoryIds.stream()
-                .map(id -> categoryRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Categoria não encontrada: " + id)))
-                .toList();
     }
 
-    private List<Streaming> findStreamings(List<UUID> streamingIds) {
-        return streamingIds.stream()
+
+    private List<Category> findCategories(List<UUID> ids) {
+        return ids.stream()
+                .map(id -> categoryRepository.findById(id)
+                        .orElseThrow(() -> new NotFoundException("Categoria não encontrada")))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private List<Streaming> findStreamings(List<UUID> ids) {
+        return ids.stream()
                 .map(id -> streamingRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Streaming não encontrado: " + id)))
-                .toList();
+                        .orElseThrow(() -> new NotFoundException("Streaming não encontrado")))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

@@ -19,14 +19,6 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping
-    public ResponseEntity<MovieResponse> createMovie(@RequestBody MovieRequest movieRequest) {
-
-        MovieResponse movieCreated = movieService.createMovie(movieRequest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(movieCreated);
-
-    }
 
     @GetMapping
     public ResponseEntity<List<MovieResponse>> findAll() {
@@ -37,6 +29,21 @@ public class MovieController {
     @GetMapping("/{id}")
     public ResponseEntity<MovieResponse> findById(@PathVariable UUID id) {
         MovieResponse movieResponses = movieService.findById(id);
+        return ResponseEntity.ok(movieResponses);
+    }
+
+    @PostMapping
+    public ResponseEntity<MovieResponse> createMovie(@RequestBody MovieRequest movieRequest) {
+
+        MovieResponse movieCreated = movieService.createMovie(movieRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieCreated);
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieResponse> updateMovie(@PathVariable UUID id, @RequestBody MovieRequest movieRequest) {
+        MovieResponse movieResponses = movieService.updateMovie(id, movieRequest );
         return ResponseEntity.ok(movieResponses);
     }
 }
