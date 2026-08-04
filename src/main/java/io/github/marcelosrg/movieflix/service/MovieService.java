@@ -43,6 +43,10 @@ public class MovieService {
     public MovieResponse findById(UUID id){
         return movieMapper.toResponse(movieRepository.findById(id).orElseThrow(() -> new NotFoundException("filme não encontrado!")));
     }
+    public List<MovieResponse> findByCategory(String category){
+        List<Movie> movie = movieRepository.findByCategoryName(category);
+        return movieMapper.toResponseList(movie);
+    }
 
     public MovieResponse createMovie(MovieRequest movieRequest) {
         Movie movie = movieMapper.toEntity(movieRequest);
@@ -66,6 +70,8 @@ public class MovieService {
 
 
     }
+
+
 
 
     private List<Category> findCategories(List<UUID> ids) {
