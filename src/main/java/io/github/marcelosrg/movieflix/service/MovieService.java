@@ -7,7 +7,6 @@ import io.github.marcelosrg.movieflix.entity.Movie;
 import io.github.marcelosrg.movieflix.entity.Streaming;
 import io.github.marcelosrg.movieflix.exception.NotFoundException;
 import io.github.marcelosrg.movieflix.mapper.MovieMapper;
-import io.github.marcelosrg.movieflix.mapper.StreamingMapper;
 import io.github.marcelosrg.movieflix.repository.CategoryRepository;
 import io.github.marcelosrg.movieflix.repository.MovieRepository;
 import io.github.marcelosrg.movieflix.repository.StreamingRepository;
@@ -59,7 +58,6 @@ public class MovieService {
 
     public MovieResponse updateMovie(UUID movieId, MovieRequest movieRequest) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new NotFoundException("Filme não encontrado!"));
-
         movie.setTitle(movieRequest.title());
         movie.setDescription(movieRequest.description());
         movie.setRating(movieRequest.rating());
@@ -68,6 +66,12 @@ public class MovieService {
         movie.setStreamings(findStreamings(movieRequest.streamings()));
         return movieMapper.toResponse(movieRepository.save(movie));
 
+    }
+
+    public void  deleteMovie(UUID movieId) {
+        movieRepository.findById(movieId).orElseThrow(() -> new NotFoundException("Filme não encontrado!"));
+
+        movieRepository.deleteById(movieId);
 
     }
 
