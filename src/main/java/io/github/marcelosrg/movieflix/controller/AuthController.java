@@ -1,6 +1,8 @@
 package io.github.marcelosrg.movieflix.controller;
 
+import io.github.marcelosrg.movieflix.dtos.request.LoginRequest;
 import io.github.marcelosrg.movieflix.dtos.request.UserRequest;
+import io.github.marcelosrg.movieflix.dtos.response.LoginResponse;
 import io.github.marcelosrg.movieflix.dtos.response.UserResponse;
 import io.github.marcelosrg.movieflix.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,12 @@ public class AuthController {
     public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest){
         UserResponse response = this.userService.register(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+        LoginResponse response = this.userService.login(loginRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response.token());
     }
 
 }
