@@ -13,3 +13,6 @@ spring:
 
   flyway:
     enabled: true
+movieflix:
+  security:
+    secret: ${SECRET:MAKDNLN1833N1JN31LBN31I73B13K1B3871B}
