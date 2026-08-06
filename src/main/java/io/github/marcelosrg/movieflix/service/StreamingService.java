@@ -36,7 +36,7 @@ public class StreamingService {
     }
 
     public void deleteStreaming(UUID id){
-        Streaming streaming = streamingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Streaming não encontrada!"));
+        Streaming streaming = streamingRepository.findById(id).orElseThrow(() -> new NotFoundException("Streaming não encontrada!"));
         streamingRepository.deleteById(id);
     }
 }
