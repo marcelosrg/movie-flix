@@ -1,4 +1,4 @@
-package io.github.marcelosrg.movieflix.contorller;
+package io.github.marcelosrg.movieflix.controller;
 
 import io.github.marcelosrg.movieflix.dtos.request.StreamingRequest;
 import io.github.marcelosrg.movieflix.dtos.response.StreamingResponse;

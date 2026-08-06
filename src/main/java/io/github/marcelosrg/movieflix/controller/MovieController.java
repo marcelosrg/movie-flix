@@ -1,10 +1,8 @@
-package io.github.marcelosrg.movieflix.contorller;
+package io.github.marcelosrg.movieflix.controller;
 
 import io.github.marcelosrg.movieflix.dtos.request.MovieRequest;
 import io.github.marcelosrg.movieflix.dtos.response.MovieResponse;
 import io.github.marcelosrg.movieflix.service.MovieService;
-import jakarta.websocket.server.PathParam;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
