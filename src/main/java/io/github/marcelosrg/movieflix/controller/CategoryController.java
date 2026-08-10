@@ -3,6 +3,7 @@ package io.github.marcelosrg.movieflix.controller;
 import io.github.marcelosrg.movieflix.dtos.request.CategoryRequest;
 import io.github.marcelosrg.movieflix.dtos.response.CategoryResponse;
 import io.github.marcelosrg.movieflix.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class CategoryController {
 
 
     @PostMapping()
-    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> createCategory(@Valid @RequestBody CategoryRequest request) {
         CategoryResponse response = categoryService.createCategory(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

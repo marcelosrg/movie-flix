@@ -3,6 +3,7 @@ package io.github.marcelosrg.movieflix.controller;
 import io.github.marcelosrg.movieflix.dtos.request.StreamingRequest;
 import io.github.marcelosrg.movieflix.dtos.response.StreamingResponse;
 import io.github.marcelosrg.movieflix.service.StreamingService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class StreamingController {
     }
 
     @PostMapping()
-    public ResponseEntity<StreamingResponse> createStreaming(@RequestBody StreamingRequest streamingRequest) {
+    public ResponseEntity<StreamingResponse> createStreaming(@Valid @RequestBody StreamingRequest streamingRequest) {
         StreamingResponse response = streamingService.createStreaming(streamingRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
