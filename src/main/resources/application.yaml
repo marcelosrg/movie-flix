@@ -20,4 +20,4 @@ springdoc:
     path: /swagger/index.html
 movieflix:
   security:
-    secret: ${SECRET}
+    secret: ${SECRET:MDKANDABNDU141B4LKB1K4B1K}
