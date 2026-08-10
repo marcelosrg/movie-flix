@@ -3,8 +3,9 @@ package io.github.marcelosrg.movieflix.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class NotFoundException extends RuntimeException {
-    public NotFoundException(String message) {
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class UsernameOrPasswordInvalidException extends RuntimeException {
+    public UsernameOrPasswordInvalidException(String message) {
         super(message);
     }
 }
